@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>辉辉记事本</title>
+	</head>
+<style>
+.todo {
+	list-style-type:none;/*去掉list样式前面的点*/
+}
+</style>
+	<body>
+		<section id="todoapp">
+			<!--输入框-->
+			<header class="header">
+				<h1>辉辉记事本</h1>
+				<input v-model="inputValue" placeholder="输入小记事" @keyup.enter="addList" />
+			</header>
+			
+			<!--列表区域-->
+			<section class="main">
+				<ul class="todo-list">
+					<li class="todo" v-for="(item,index) in list">
+						<div class="view">
+							<span class="index">{{index+1}}</span>
+							<label>{{item}}</label>
+							<button class="destroy" @click="remove(index)">×</button>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<!--
+            	作者：chenwenhui@qq.com
+            	时间：2020-05-15
+            	描述：统计和清空
+            -->
+            <footer class="footer" v-show="list.length!=0">
+            	<span class="todo-count"><strong>{{list.length}}</strong>item left</span>
+            	<button class="clear-completed" @click="clear">
+            		Clear
+            	</button>
+            </footer>
+		</section>
+		<!--
+        	作者：chenwenhui@qq.com
+        	时间：2020-05-15
+        	描述：底部
+        -->
+		<footer class="info">
+            	
+        </footer>
+        <se
+	</body>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	
+	<script>
+		var todoapp = new Vue({
+			el:"#todoapp",
+			data:{
+				list:["爱我就抱抱我","呵！滚滚滚","你不想我吗？"],
+				inputValue:"爱我吗？",
+				
+			},
+			methods:{
+				addList:function(){
+					this.list.push(this.inputValue);
+				},
+				remove:function(index){
+//					console.log(index);
+					this.list.splice(index,1);//index:从哪开始删，第二个参数：删几个
+				},
+				clear:function(){
+					this.list = [];//直接将空数组赋值给原数组就行了
+				}
+			}
+		})
+	</script>
+</html>
+<!--section元素表示文档或应用的一个部分。所谓“部分”，这里是指按照
+主题分组的内容区域，通常会带有标题。【也就是每个section对应不同
+的主题。注意是内容本身的主题，而不是其他人为设定的划分标准。】
+section的例子包括书的章节回目、多tab对话框的每个tab页、论文
+以数字编号的小节。网站的主页可能分成介绍、最新内容、联系信息等
+section。注意：网页作者应使用article而不是section元素，
+如果其内容是用于聚合（syndicate）。【比如blog首页上的每篇
+blog。又如论坛帖子的一楼、二楼、三楼……n楼。通常这样的每部分
+内容形式上是类似的，但是来源是独立的。】注意：section不是通用
+容器元素。如果仅仅是用于设置样式或脚本处理，应用div元素。一条简单
+的准则是，只有元素内容会被列在文档大纲中时，才适合用section元素。
+
+作者：贺师俊
+链接：https://www.zhihu.com/question/20227599/answer/14582155
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。-->
+<!--一个section通常由内容和标题组成，通常不推荐那些没有标题的内容用section，
+在HTML 5 Outliner这个网站可以检测没有标题的section，section的作用
+是对页面上的内容进行分块，如各个有标题的版块、功能区或对文章进行分段，不要与
+有自己完整、独立内容的article混淆。拿报纸举个例子：一份或一张报纸有很多个
+版块，有头版、国际时事版块、体育版块、娱乐版块、文学版块等等，像这种有版块
+标题的、内容属于一类的版块就可以用section包起来。然后在各个版块下面，又有
+很多文章、报道，每篇文章都有自己的文章标题、文章内容。这个时候用article就最好。
+如果一篇报道太长，分好多段，每段都有自己的小标题，这时候又可以用section把段落包起来。
+
+作者：知乎用户
+链接：https://www.zhihu.com/question/20227599/answer/16314207
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。-->
